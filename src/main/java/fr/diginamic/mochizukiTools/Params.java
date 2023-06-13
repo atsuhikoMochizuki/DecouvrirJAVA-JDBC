@@ -17,7 +17,7 @@ public class Params {
     public static final String URL = project.getString ("project.url");
 
     public static void welcomePrompt() {
-        String logo = null;
+        String logo;
         Utils.clearConsole ();
         try {
             logo = FigletFont.convertOneLine (LOGO);
