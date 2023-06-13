@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="75c20231-6e14-43a3-8372-c67bca64d69a" name="Changes" comment="Ajout du log en fichier App.log">
-      <change afterPath="$PROJECT_DIR$/src/test/java/fr/diginamic/TestApp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/fr/diginamic/database/Database.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/fr/diginamic/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/diginamic/Main.java" afterDir="false" />
@@ -36,12 +36,12 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="fr.diginamic" />
@@ -54,7 +54,7 @@
       <command value="mvn clean compile" />
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.TestApp.testValueOfLibelle">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="fr.diginamic.Main" />
       <module name="DecouvrirJAVA-JDBC" />
@@ -99,8 +99,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.TestApp.testValueOfLibelle" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.TestApp.testValueOfLibelle" />
       </list>
     </recent_temporary>
   </component>
@@ -196,7 +196,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/fr/diginamic/Main.java</url>
-          <line>13</line>
+          <line>23</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
