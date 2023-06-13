@@ -26,24 +26,14 @@ public class Main {
 //        LOG.info ("Implementation Logback");
         //LogAppender.executer ("Démarrage de l'application");
         Connection db = Database.connect ();
-        System.out.println (db);
+        db = Database.disconnect (db);
+        db = Database.disconnect (db);
 
 
-
-//        try {
-//            db = DriverManager.getConnection (URL, USER, PWD);
-//        } catch (SQLException e) {
-//            throw new RuntimeException (e);
-//        }
-//
-//        System.out.println (db);
-//
-//        try {
-//            db.close ();
-//        } catch (SQLException ex) {
-//            throw new RuntimeException (ex);
-//        }
     }
+
+
+
 
     public static int addition(int a, int b) {
         return a + b;
