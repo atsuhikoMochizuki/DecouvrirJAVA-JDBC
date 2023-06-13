@@ -16,4 +16,8 @@ public class Main {
 //        LOG.info ("Implementation Logback");
         LogAppender.executer ("Démarrage de l'application");
     }
+    public static int addition(int a, int b)
+    {
+        return a+b;
+    }
 }

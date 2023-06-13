@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="75c20231-6e14-43a3-8372-c67bca64d69a" name="Changes" comment="Implémentation slf4j OK">
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/diginamic/service/LogAppender.java" afterDir="false" />
+    <list default="true" id="75c20231-6e14-43a3-8372-c67bca64d69a" name="Changes" comment="Ajout du log en fichier App.log">
+      <change afterPath="$PROJECT_DIR$/src/test/java/fr/diginamic/TestApp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/fr/diginamic/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/diginamic/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/configLogs.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/configLogs.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +54,7 @@
       <command value="mvn clean compile" />
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.TestApp.testValueOfLibelle">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="fr.diginamic.Main" />
       <module name="DecouvrirJAVA-JDBC" />
@@ -64,6 +64,22 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestApp.testValueOfLibelle" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="DecouvrirJAVA-JDBC" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="fr.diginamic.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="fr.diginamic" />
+      <option name="MAIN_CLASS_NAME" value="fr.diginamic.TestApp" />
+      <option name="METHOD_NAME" value="testValueOfLibelle" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -83,6 +99,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.TestApp.testValueOfLibelle" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
@@ -145,7 +162,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686690881885</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Ajout du log en fichier App.log">
+      <created>1686692246280</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1686692246280</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -164,7 +188,8 @@
     <MESSAGE value="1er commit" />
     <MESSAGE value="2nd commit" />
     <MESSAGE value="Implémentation slf4j OK" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implémentation slf4j OK" />
+    <MESSAGE value="Ajout du log en fichier App.log" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ajout du log en fichier App.log" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

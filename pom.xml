@@ -55,7 +55,6 @@
                     <archive>
                         <manifest>
                             <mainClass>fr.diginamic.Main</mainClass>
-                            1
                         </manifest>
                     </archive>
                 </configuration>
