@@ -1,17 +1,10 @@
 package fr.diginamic;
 
-import ch.qos.logback.core.encoder.JsonEscapeUtil;
 import fr.diginamic.database.Database;
-import fr.diginamic.mochizukiTools.Params;
-import fr.diginamic.mochizukiTools.Utils;
-import fr.diginamic.service.LogAppender;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.util.ResourceBundle;
 
 public class Main {
     private static final Logger LOG = LoggerFactory.getLogger (Main.class);
@@ -26,8 +19,12 @@ public class Main {
 //        LOG.info ("Implementation Logback");
         //LogAppender.executer ("Démarrage de l'application");
         Connection db = Database.connect ();
+        Database.listTableRows (db,"FOURNISSEUR","NOM");
+        Database.updateValue (db,"FOURNISSEUR","NOM","FDM SA","TOTOLITOTO");
+        Database.listTableRows (db,"FOURNISSEUR","NOM");
+
         db = Database.disconnect (db);
-        db = Database.disconnect (db);
+
 
 
     }
