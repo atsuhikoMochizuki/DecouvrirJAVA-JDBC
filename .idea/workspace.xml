@@ -4,14 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="75c20231-6e14-43a3-8372-c67bca64d69a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/diginamic/dao/IArticleDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/diginamic/dao/jdbc/ArticlesDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/diginamic/entites/Articles.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.log" beforeDir="false" afterPath="$PROJECT_DIR$/app.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/diginamic/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/diginamic/Main.java" afterDir="false" />
-    </list>
+    <list default="true" id="75c20231-6e14-43a3-8372-c67bca64d69a" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -135,7 +128,7 @@
       <workItem from="1687082337205" duration="966000" />
       <workItem from="1687083587339" duration="7818000" />
       <workItem from="1687092604044" duration="8462000" />
-      <workItem from="1687101225582" duration="7516000" />
+      <workItem from="1687101225582" duration="7825000" />
     </task>
     <task id="LOCAL-00001" summary="1er Commit">
       <created>1686687725615</created>
@@ -235,7 +228,14 @@
       <option name="project" value="LOCAL" />
       <updated>1687106221620</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="TP6 à terminer">
+      <created>1687108793025</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1687108793025</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -264,6 +264,7 @@
     <MESSAGE value="tp3 terminé" />
     <MESSAGE value="tp4 terminé" />
     <MESSAGE value="TP 5 Terminé" />
-    <option name="LAST_COMMIT_MESSAGE" value="TP 5 Terminé" />
+    <MESSAGE value="TP6 à terminer" />
+    <option name="LAST_COMMIT_MESSAGE" value="TP6 à terminer" />
   </component>
 </project>
