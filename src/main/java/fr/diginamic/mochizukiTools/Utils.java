@@ -57,7 +57,7 @@ public class Utils {
     }
 
     public static void msgConsign(String i_str) {
-        System.out.printf("[%sCONSIGN%s]%s%s%s\n", Colors.ANSI_BLUE, Colors.ANSI_RESET, Colors.ANSI_BLUE, i_str, Colors.ANSI_RESET);
+        System.out.printf("[%sCONSIGN%s]%s%s%s\n", Colors.ANSI_PURPLE, Colors.ANSI_RESET, Colors.ANSI_PURPLE, i_str, Colors.ANSI_RESET);
     }
 
 

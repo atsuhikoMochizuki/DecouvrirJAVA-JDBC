@@ -32,3 +32,5 @@
                 Unknown database 'DecouvrirJDBC_Compta";'
 14:52:22.258 [main] ERROR fr.diginamic.Main -
                 Unknown database 'DecouvrirJDBC_Compta;'
+17:59:19.248 [main] ERROR fr.diginamic.entites.Fournisseur -
+                You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'espace Création')' at line 1

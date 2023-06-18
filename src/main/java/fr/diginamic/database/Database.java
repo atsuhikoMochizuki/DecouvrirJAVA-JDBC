@@ -1,18 +1,27 @@
 package fr.diginamic.database;
 
 import fr.diginamic.Main;
+import fr.diginamic.entites.Fournisseur;
 import fr.diginamic.mochizukiTools.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 
 public class Database {
-    private static ResourceBundle db_conf = ResourceBundle.getBundle("project");
-    private static String URL = db_conf.getString("database.url");
-    private static String USER = db_conf.getString("database.user");
-    private static String PWD = db_conf.getString("database.pwd");
+    private static ResourceBundle db_conf;
+    private static String URL, USER, PWD;
+
+    static {
+        db_conf = ResourceBundle.getBundle("project");
+        URL = db_conf.getString("database.url");
+        USER = db_conf.getString("database.user");
+        PWD = db_conf.getString("database.pwd");
+    }
 
     public static Connection connect() {
         Logger log = LoggerFactory.getLogger(Main.class);
@@ -25,7 +34,7 @@ public class Database {
             Utils.msgInfo(String.format("Connection à la base de données %s OK", URL));
         } catch (SQLException accessError) {
             log.error(accessError.getMessage());
-                throw new RuntimeException();
+            throw new RuntimeException();
         }
 
         return db;
@@ -51,78 +60,59 @@ public class Database {
         return db;
     }
 
+    public static void insertEntity(String tableName, String Column, String Value) {
+        Logger log = LoggerFactory.getLogger(Fournisseur.class);
+        Connection db = Database.connect();
 
-//    public static int insertValue(Connection db, String table, String column, String value) {
-//        Statement st = null;
-//        String msg = null;
-//        int nbreLines = 0;
-//
-//        msg = String.format("Enregistrement de la valeur %s dans la table %s(%s)", value, table, column);
-//        Utils.msgInfo(msg);
-//
-//        try {
-//            st = db.createStatement();
-//            msg = String.format("INSERT INTO %s(%s) VALUES('%s')", table, column, value);
-//            nbreLines = st.executeUpdate(msg);
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        } finally {
-//            try {
-//                st.close();
-//            } catch (SQLException e) {
-//                throw new RuntimeException(e);
-//            }
-//        }
-//        msg = String.format("Insertion dans la table OK. Nbre de lignes insérées : %d", nbreLines);
-//        Utils.msgResult(msg);
-//        return nbreLines;
-//    }
-//
-//    public static int listTableRows(Connection db, String table, String column) {
-//        Statement st = null;
-//        String msg = null;
-//        int nbreLines = 0;
-//        ResultSet rs = null;
-//        Utils.msgInfo(String.format("Lecture des valeurs de la colonne %s dans la table %s", column, table));
-//
-//        try {
-//            st = db.createStatement();
-//            msg = String.format("SELECT * FROM %s;", table);
-//            Utils.msgConsign(msg);
-//            rs = st.executeQuery(msg);
-//            while (rs.next()) {
-//                System.out.println(rs.getInt(1) + "-" + rs.getString(column));
-//            }
-//            rs.close();
-//            st.close();
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
-//
-//        return nbreLines;
-//    }
-//
-//    public static int updateValue(Connection db, String table, String column, String old_value, String newValue) {
-//        String req = "UPDATE %s SET %s = '%s' WHERE %s = '%s'";
-//        String msg = null;
-//        Statement st = null;
-//        int nb = 0;
-//        try {
-//            st = db.createStatement();
-//            msg = String.format(req, table, column, newValue, column, old_value);
-//            Utils.msgConsign(msg);
-//            nb = st.executeUpdate(msg);
-//            msg = String.format("Nbre de lignes traitées: %d", nb);
-//            Utils.msgConsign(msg);
-//        } catch (SQLException e) {
-//            System.err.println(e.getMessage());
-//        } finally {
-//            try {
-//                st.close();
-//            } catch (SQLException e) {
-//                throw new RuntimeException(e);
-//            }
-//        }
-//        return nb;
-//    }
+        String req = String.format("INSERT INTO %s(%s) VALUES('%s')", tableName, Column, Value);
+        Utils.msgDebug(req);
+
+        try (Statement st = db.createStatement()) {
+            st.executeUpdate(req);
+        } catch (SQLException e) {
+            log.error(e.getMessage());
+            throw new RuntimeException(e);
+        }
+
+        Database.disconnect(db);
+    }
+
+    public static int updateEntity(String tableName, String column, String new_value, String old_value) {
+        int nb_lignes = 0;
+        Logger log = LoggerFactory.getLogger(Fournisseur.class);
+
+        Connection db = Database.connect();
+
+        String req = String.format("UPDATE %s SET %s='%s' WHERE %s='%s'", tableName, column, new_value, column, old_value);
+        Utils.msgDebug(req);
+
+        try (Statement st = db.createStatement()) {
+            nb_lignes = st.executeUpdate(req);
+        } catch (SQLException e) {
+            log.error(e.getMessage());
+            throw new RuntimeException(e);
+        }
+
+        Database.disconnect(db);
+        return nb_lignes;
+    }
+
+    public static boolean deleteEntity(String tableName, String column, String value) {
+        boolean returnValue = false;
+        Logger log = LoggerFactory.getLogger(Fournisseur.class);
+
+        Connection db = Database.connect();
+
+        String req = String.format("DELETE FROM %s WHERE %s='%s'", tableName, column, value);
+        Utils.msgDebug(req);
+        try (Statement st = db.createStatement()) {
+            st.executeUpdate(req);
+        } catch (SQLException e) {
+            log.error(e.getMessage());
+            throw new RuntimeException(e);
+        }
+
+        Database.disconnect(db);
+        return returnValue;
+    }
 }
