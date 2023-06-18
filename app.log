@@ -52,3 +52,7 @@
                 Parameter index out of range (1 > number of parameters, which is 0).
 18:28:09.457 [main] ERROR fr.diginamic.entites.Fournisseur -
                 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '? WHERE NOM=?' at line 1
+18:56:08.688 [main] ERROR fr.diginamic.entites.Fournisseur -
+                Unknown column 'DESIGNATION' in 'field list'
+18:58:21.766 [main] ERROR fr.diginamic.entites.Fournisseur -
+                Field 'REF' doesn't have a default value

@@ -1,15 +1,20 @@
 package fr.diginamic;
 
+import fr.diginamic.dao.IArticleDao;
 import fr.diginamic.dao.IFournisseurDao;
+import fr.diginamic.dao.jdbc.ArticlesDao;
 import fr.diginamic.dao.jdbc.FournisseurDao;
+import fr.diginamic.database.Database;
+import fr.diginamic.entites.Articles;
 import fr.diginamic.entites.Fournisseur;
 import fr.diginamic.mochizukiTools.Params;
 import fr.diginamic.mochizukiTools.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.sql.Connection;
+import java.sql.*;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 public class Main {
 
@@ -21,69 +26,92 @@ public class Main {
         Utils.clearConsole();
         Params.welcomePrompt();
 
-//        Utils.msgTitle("TP1 : Se connecter à une base de données locale");
-//
-//        final String URL = "jdbc:mysql://localhost:3306/DecouvrirJDBC_Compta";
-//        final String USER = "root";
-//        final String PWD = "root";
-//
-//        Utils.msgInfo("Connection à la base de données");
-//        try(Connection db1 = DriverManager.getConnection(URL,USER,PWD))
-//        {
-//            Utils.msgInfo("Connection à la base de données OK");
-//        } catch (SQLException e) {
-//            LOG.error(e.getMessage());
-//            throw new RuntimeException(e);
-//        }
-//
-//        Utils.msgTitle("TP2 : Créer un fichier de configuration pour l'accès aux données");
-//
-//        Utils.msgInfo("Import des propriétés de connection dans le fichiers properties");
-//        ResourceBundle project = ResourceBundle.getBundle("project");
-//        String URL_BY_PROP = project.getString("database.url");
-//        String USER_BY_PROP = project.getString("database.user");
-//        String PWD_BY_PROP = project.getString("database.pwd");
-//        Utils.msgInfo("Import des ressources OK");
-//
-//        Utils.msgInfo("Connection à la base de données distante (Clever-cloud)");
-//
-//        //On utilise ici le bloc finally
-//        try
-//        {
-//            db = DriverManager.getConnection(
-//                    URL_BY_PROP,
-//                    USER_BY_PROP,
-//                    PWD_BY_PROP);
-//            Utils.msgInfo("Connection à la base de données OK");
-//        }
-//        catch (SQLException accessError){
-//            LOG.error(accessError.getMessage());
-//            throw new RuntimeException(accessError);
-//        }
-//        finally
-//        {
-//            try {
-//                db.close();
-//            } catch (SQLException e) {
-//                throw new RuntimeException(e);
-//            }
-//        }
+        Utils.msgTitle("TP1 : Se connecter à une base de données locale");
 
-//        Utils.msgTitle("TP3: Opérations CRUD");
-//        Database.insertEntity(Fournisseur.FOURNISSEUR_TABLE_NAME, Fournisseur.FOURNISSEUR_NAME, "La maison de la peinture");
-//        Database.updateEntity(Fournisseur.FOURNISSEUR_TABLE_NAME, Fournisseur.FOURNISSEUR_NAME, "La maison des peintures", "La maison de la peinture");
-//        Database.deleteEntity(Fournisseur.FOURNISSEUR_TABLE_NAME,Fournisseur.FOURNISSEUR_NAME,"La maison des peintures");
-//
-//        ArrayList<Fournisseur> fournisseurs = Fournisseur.extraireListe();
-//        Utils.msgInfo("Affichage de la liste:");
-//        for(Fournisseur f: fournisseurs)
-//            Utils.msgResult(f.toString());
+        final String URL = "jdbc:mysql://localhost:3306/DecouvrirJDBC_Compta";
+        final String USER = "root";
+        final String PWD = "root";
+
+        Utils.msgInfo("Connection à la base de données");
+        try(Connection db1 = DriverManager.getConnection(URL,USER,PWD))
+        {
+            Utils.msgInfo("Connection à la base de données OK");
+        } catch (SQLException e) {
+            LOG.error(e.getMessage());
+            throw new RuntimeException(e);
+        }
+
+        Utils.msgTitle("TP2 : Créer un fichier de configuration pour l'accès aux données");
+
+        Utils.msgInfo("Import des propriétés de connection dans le fichiers properties");
+        ResourceBundle project = ResourceBundle.getBundle("project");
+        String URL_BY_PROP = project.getString("database.url");
+        String USER_BY_PROP = project.getString("database.user");
+        String PWD_BY_PROP = project.getString("database.pwd");
+        Utils.msgInfo("Import des ressources OK");
+
+        Utils.msgInfo("Connection à la base de données distante (Clever-cloud)");
+
+        //On utilise ici le bloc finally
+        try
+        {
+            db = DriverManager.getConnection(
+                    URL_BY_PROP,
+                    USER_BY_PROP,
+                    PWD_BY_PROP);
+            Utils.msgInfo("Connection à la base de données OK");
+        }
+        catch (SQLException accessError){
+            LOG.error(accessError.getMessage());
+            throw new RuntimeException(accessError);
+        }
+        finally
+        {
+            try {
+                db.close();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        Utils.msgTitle("TP3: Opérations CRUD");
+        Database.insertEntity(Fournisseur.FOURNISSEUR_TABLE_NAME, Fournisseur.FOURNISSEUR_NAME, "La maison de la peinture");
+        Database.updateEntity(Fournisseur.FOURNISSEUR_TABLE_NAME, Fournisseur.FOURNISSEUR_NAME, "La maison des peintures", "La maison de la peinture");
+        Database.deleteEntity(Fournisseur.FOURNISSEUR_TABLE_NAME,Fournisseur.FOURNISSEUR_NAME,"La maison des peintures");
+
+        Utils.msgConsign("Extraction de la liste des fournisseeurs");
+        ArrayList<Fournisseur> listeFournisseurs = new ArrayList<>();
+        Logger log = LoggerFactory.getLogger(Fournisseur.class);
+        db = Database.connect();
+
+        final String req = "SELECT * FROM FOURNISSEURS";
+        Utils.msgDebug(req);
+        try (PreparedStatement pst = db.prepareStatement(req)) {
+            ResultSet curseur = pst.executeQuery(req);
+            while(curseur.next())
+            {
+                int id = curseur.getInt("ID");
+                String name = curseur.getString("NOM");
+                Fournisseur currentFournisseur = new Fournisseur(id,name);
+                listeFournisseurs.add(currentFournisseur);
+            }
+        } catch (SQLException e) {
+            log.error(e.getMessage());
+            throw new RuntimeException(e);
+        }
+        Utils.msgInfo("Extraction terminée");
+
+        Database.disconnect(db);
+
+        Utils.msgInfo("Affichage de la liste:");
+        for(Fournisseur f: listeFournisseurs)
+            Utils.msgResult(f.toString());
 
         Utils.msgTitle("TP4: Mise en place de DAO");
+        ArrayList<Fournisseur> fournisseurs = new ArrayList<>();
         IFournisseurDao dao= new FournisseurDao();
-        Utils.msgConsign("Extraction de la liste des fournisseeurs");
-        ArrayList<Fournisseur> fournisseurs =  dao.extraire();
-        Utils.msgInfo("Rafraichissement de la listes des fournisseurs");
+
+       Utils.msgInfo("Rafraichissement de la listes des fournisseurs");
         for(Fournisseur fournisseur:fournisseurs)
             System.out.println(fournisseur.toString());
 
@@ -159,6 +187,10 @@ public class Main {
         for(Fournisseur fournisseur:fournisseurs)
             System.out.println(fournisseur.toString());
 
-
+        Utils.msgTitle("TP5: Mise en place d’une DAO pour la gestion\n" +
+                "des Articles");
+        IArticleDao articleDao = new ArticlesDao();
+        Articles articleAinserer = new Articles("AO3","Meuleuse d'angle",152.49,3);
+        articleDao.insert(articleAinserer);
     }
 }
