@@ -6,8 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="DecouvrirJAVA-JDBC" />
+        <module name="IntroductionJPA-comprendre_JDBC" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="IntroductionJPA-comprendre JDBC" target="9" />
+      <module name="MochizukiTemplate" target="9" />
+    </bytecodeTargetLevel>
   </component>
 </project>

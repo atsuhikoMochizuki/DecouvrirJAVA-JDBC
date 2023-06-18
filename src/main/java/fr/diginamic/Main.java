@@ -1,35 +1,89 @@
 package fr.diginamic;
 
-import fr.diginamic.database.Database;
+import fr.diginamic.entites.Fournisseur;
+import fr.diginamic.mochizukiTools.Params;
+import fr.diginamic.mochizukiTools.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 public class Main {
-    private static final Logger LOG = LoggerFactory.getLogger (Main.class);
-//    public static final String URL = "jdbc:mysql://localhost:3306/";
-//    public static final String USER = "root";
-//    public static final String PWD = "root";
+
+    private static final Logger LOG = LoggerFactory.getLogger(Main.class);
+
 
     public static void main(String[] args) {
-//        Utils.clearConsole ();
-//        Params.welcomePrompt ();
-//        LOG.info ("Bonjour Slf4J !");
-//        LOG.info ("Implementation Logback");
-        //LogAppender.executer ("Démarrage de l'application");
-        Connection db = Database.connect ();
-        Database.listTableRows (db,"FOURNISSEUR","NOM");
-        Database.updateValue (db,"FOURNISSEUR","NOM","FDM SA","TOTOLITOTO");
-        Database.listTableRows (db,"FOURNISSEUR","NOM");
+        Connection db = null;
+        Utils.clearConsole();
+        Params.welcomePrompt();
 
-        db = Database.disconnect (db);
+//        Utils.msgTitle("TP1 : Se connecter à une base de données locale");
+//
+//        final String URL = "jdbc:mysql://localhost:3306/DecouvrirJDBC_Compta";
+//        final String USER = "root";
+//        final String PWD = "root";
+//
+//        Utils.msgInfo("Connection à la base de données");
+//        try(Connection db1 = DriverManager.getConnection(URL,USER,PWD))
+//        {
+//        } catch (SQLTimeoutException timeOutError){
+//            LOG.error(timeOutError.getMessage());
+//            throw new RuntimeException(timeOutError);
+//        } catch (SQLException accessError) {
+//            LOG.error(accessError.getMessage());
+//            throw new RuntimeException(accessError);
+//        } finally{
+//            Utils.msgInfo("Connection à la base de données OK");
+//        }
+//
+//        Utils.msgTitle("TP2 : Créer un fichier de configuration pour l'accès aux données");
+//
+//        Utils.msgInfo("Import des propriétés de connection dans le fichiers properties");
+//        ResourceBundle project = ResourceBundle.getBundle("project");
+//        String URL_BY_PROP = project.getString("database.url");
+//        String USER_BY_PROP = project.getString("database.user");
+//        String PWD_BY_PROP = project.getString("database.pwd");
+//        Utils.msgInfo("Import des ressources OK");
+//
+//        Utils.msgInfo("Connection à la base de données distante (Clever-cloud)");
+//
+//        //On utilise ici le bloc finally
+//        try
+//        {
+//            db = DriverManager.getConnection(
+//                    URL_BY_PROP,
+//                    USER_BY_PROP,
+//                    PWD_BY_PROP);
+//            Utils.msgInfo("Connection à la base de données OK");
+//        }
+//        catch(SQLTimeoutException timeOutError){
+//            LOG.error(timeOutError.getMessage());
+//            throw new RuntimeException(timeOutError);
+//        }
+//        catch (SQLException accessError){
+//            LOG.error(accessError.getMessage());
+//            throw new RuntimeException(accessError);
+//        }
+//        finally
+//        {
+//            try {
+//                db.close();
+//            } catch (SQLException e) {
+//                throw new RuntimeException(e);
+//            }
+//        }
 
-
-
+        Utils.msgConsign("TP3: Opérations CRUD");
+        Fournisseur.insert("La maison de la peinture");
+        Fournisseur.updateName("La maison de la peinture", "La maison des peintures");
+        Fournisseur.delete("La maison des peintures");
+        ArrayList<Fournisseur> fournisseurs = Fournisseur.extraireListe();
+        Utils.msgInfo("Affichage de la liste:");
+        for(Fournisseur f: fournisseurs)
+            Utils.msgResult(f.toString());
     }
-
-
 
 
     public static int addition(int a, int b) {
