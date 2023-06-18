@@ -7,10 +7,7 @@ import fr.diginamic.mochizukiTools.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,10 +25,10 @@ public class FournisseurDao implements IFournisseurDao {
         Utils.msgInfo("Extraction de la liste des fournisseurs");
         Connection db = Database.connect();
 
-        String req = String.format("SELECT * FROM %s", FOURNISSEUR_TABLE_NAME);
+        final String req = String.format("SELECT * FROM %s", FOURNISSEUR_TABLE_NAME);
         Utils.msgDebug(req);
-        try (Statement st = db.createStatement()) {
-            ResultSet curseur = st.executeQuery(req);
+        try (PreparedStatement pst = db.prepareStatement(req)) {
+            ResultSet curseur = pst.executeQuery(req);
             while(curseur.next())
             {
                 int id = curseur.getInt(FOURNISSEUR_ID);

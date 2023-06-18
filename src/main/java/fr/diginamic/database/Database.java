@@ -6,10 +6,7 @@ import fr.diginamic.mochizukiTools.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ResourceBundle;
 
 public class Database {
@@ -60,15 +57,16 @@ public class Database {
         return db;
     }
 
-    public static void insertEntity(String tableName, String Column, String Value) {
+    public static void insertEntity(String tableName, String Column, String value) {
         Logger log = LoggerFactory.getLogger(Fournisseur.class);
         Connection db = Database.connect();
 
-        String req = String.format("INSERT INTO %s(%s) VALUES('%s')", tableName, Column, Value);
+        String req = String.format("INSERT INTO %s(%s) VALUES(?)", tableName, Column);
         Utils.msgDebug(req);
 
-        try (Statement st = db.createStatement()) {
-            st.executeUpdate(req);
+        try (PreparedStatement pst = db.prepareStatement(req)) {
+            pst.setString(1,value);
+            pst.executeUpdate();
         } catch (SQLException e) {
             log.error(e.getMessage());
             throw new RuntimeException(e);
@@ -83,11 +81,13 @@ public class Database {
 
         Connection db = Database.connect();
 
-        String req = String.format("UPDATE %s SET %s='%s' WHERE %s='%s'", tableName, column, new_value, column, old_value);
+        String req = String.format("UPDATE %s SET %s=? WHERE %s=?", tableName, column, column);
         Utils.msgDebug(req);
 
-        try (Statement st = db.createStatement()) {
-            nb_lignes = st.executeUpdate(req);
+        try (PreparedStatement pst = db.prepareStatement(req)) {
+            pst.setString(1,new_value);
+            pst.setString(2,old_value);
+            nb_lignes = pst.executeUpdate();
         } catch (SQLException e) {
             log.error(e.getMessage());
             throw new RuntimeException(e);
@@ -103,10 +103,11 @@ public class Database {
 
         Connection db = Database.connect();
 
-        String req = String.format("DELETE FROM %s WHERE %s='%s'", tableName, column, value);
+        String req = String.format("DELETE FROM %s WHERE %s=?", tableName, column);
         Utils.msgDebug(req);
-        try (Statement st = db.createStatement()) {
-            st.executeUpdate(req);
+        try (PreparedStatement pst = db.prepareStatement(req)) {
+            pst.setString(1,value);
+            pst.executeUpdate();
         } catch (SQLException e) {
             log.error(e.getMessage());
             throw new RuntimeException(e);

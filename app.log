@@ -34,3 +34,21 @@
                 Unknown database 'DecouvrirJDBC_Compta;'
 17:59:19.248 [main] ERROR fr.diginamic.entites.Fournisseur -
                 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'espace Création')' at line 1
+18:11:23.303 [main] ERROR fr.diginamic.entites.Fournisseur -
+                You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''FOURNISSEURS'' at line 1
+18:13:41.600 [main] ERROR fr.diginamic.entites.Fournisseur -
+                You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''FOURNISSEURS'' at line 1
+18:13:48.078 [main] ERROR fr.diginamic.entites.Fournisseur -
+                Parameter index out of range (0 < 1 ).
+18:14:30.950 [main] ERROR fr.diginamic.entites.Fournisseur -
+                Parameter index out of range (0 < 1 ).
+18:14:45.418 [main] ERROR fr.diginamic.entites.Fournisseur -
+                You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''FOURNISSEURS'' at line 1
+18:20:25.050 [main] ERROR fr.diginamic.entites.Fournisseur -
+                Parameter index out of range (1 > number of parameters, which is 0).
+18:21:29.634 [main] ERROR fr.diginamic.entites.Fournisseur -
+                You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?)' at line 1
+18:22:27.854 [main] ERROR fr.diginamic.entites.Fournisseur -
+                Parameter index out of range (1 > number of parameters, which is 0).
+18:28:09.457 [main] ERROR fr.diginamic.entites.Fournisseur -
+                You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '? WHERE NOM=?' at line 1

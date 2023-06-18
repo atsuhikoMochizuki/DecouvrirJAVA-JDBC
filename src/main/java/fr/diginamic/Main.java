@@ -115,10 +115,49 @@ public class Main {
         for(Fournisseur fournisseur:fournisseurs)
             System.out.println(fournisseur.toString());
 
+        Utils.msgTitle("TP5 : Utilisation des PreraredStatements");
+        Utils.msgConsign("Extraction de la liste des fournisseurs");
+        fournisseurs = dao.extraire();
+        Utils.msgInfo("Rafraichissement de la liste:");
+        for(Fournisseur fournisseur:fournisseurs)
+            System.out.println(fournisseur.toString());
+
+        Utils.msgConsign("Insertion d'un nouveau fournisseur");
+        Fournisseur fournisseur3 = new Fournisseur("AUCHAN");
+        dao.insert(fournisseur3);
+        Utils.msgInfo("Rafraichissement de la liste:");
+        fournisseurs = dao.extraire();
+        for(Fournisseur fournisseur:fournisseurs)
+            System.out.println(fournisseur.toString());
+
+        Utils.msgConsign("Modification d'un fournisseur");
+        dao.update("AUCHAN","CARREFOUR");
+        Utils.msgInfo("Rafraichissement de la liste:");
+        fournisseurs = dao.extraire();
+        for(Fournisseur fournisseur:fournisseurs)
+            System.out.println(fournisseur.toString());
+
+        Utils.msgConsign("Suppression d'un fournisseur");
+        Fournisseur fournisseur4 = new Fournisseur("SUPER U");
+        dao.insert(fournisseur4);
+        Utils.msgInfo("Rafraichissement de la liste:");
+        fournisseurs = dao.extraire();
+        for(Fournisseur fournisseur:fournisseurs)
+            System.out.println(fournisseur.toString());
+        dao.delete(fournisseur4);
+        Utils.msgInfo("Rafraichissement de la liste:");
+        fournisseurs = dao.extraire();
+        for(Fournisseur fournisseur:fournisseurs)
+            System.out.println(fournisseur.toString());
 
 
-
-
+        Utils.msgConsign("Insertion d'un fournisseur avec un simple quote");
+        Fournisseur fournisseur5 = new Fournisseur("L'espace Création");
+        dao.insert(fournisseur5);
+        Utils.msgInfo("Rafraichissement de la liste:");
+        fournisseurs = dao.extraire();
+        for(Fournisseur fournisseur:fournisseurs)
+            System.out.println(fournisseur.toString());
 
 
     }
